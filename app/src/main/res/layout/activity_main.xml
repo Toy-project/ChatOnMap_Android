@@ -1,52 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="230dp"
-        android:layout_height="44dp"
-        android:hint="아이디 입력"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="148dp" />
+        android:layout_width="277dp"
+        android:layout_height="51dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="190dp"
+        android:text="             아이디 입력"
+        android:textColor="#ffffff"
+        android:textSize="13sp"
+        android:background="@drawable/shape1" />
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="230dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="22dp"
-        android:hint="비빌번호 입력"
-        app:layout_constraintBottom_toTopOf="@+id/google_login_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        android:layout_width="276dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:text="             비밀번호 입력"
+        android:textColor="#ffffff"
+        android:textSize="13sp"
+        android:background="@drawable/shape2" />
+
+
+    <Button
+        android:layout_width="260dp"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="158dp"
+        android:text="로그인"
+        android:textSize="15sp"
+        android:textColor="#FF0099"
+        android:background="@drawable/shape3" />
+
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/google_login_button"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="183dp"
-        android:text="Google Login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        android:layout_width="308dp"
+        android:layout_height="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="68dp"
+        android:text="Google Login" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/facebook_login_button"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="138dp"
-        android:paddingTop="15dp"
+        android:layout_width="298dp"
+        android:layout_height="3dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp"
         android:paddingBottom="13dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/google_login_button"
-        app:layout_constraintTop_toBottomOf="@+id/email"
-        app:layout_constraintVertical_bias="1.0" />
+        android:paddingTop="15dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="251dp"
+        android:layout_height="51dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="116dp"
+        app:srcCompat="@drawable/logo" />
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
