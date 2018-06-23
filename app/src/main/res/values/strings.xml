@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Nearendipity</string>
+    <string name="facebook_app_id">297130990826899</string>
+    <string name="fb_login_protocol_scheme">fb297130990826899</string>
+</resources>
