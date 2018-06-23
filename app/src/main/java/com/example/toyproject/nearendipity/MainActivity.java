@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private CallbackManager mCallbackManager;
     private SignInButton google_btn;
     private LoginButton facebook_btn;
+
+    private EditText email_edit, password_edit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,4 +160,33 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+
+    //이메일 로그인
+    public void buttonLogin (View v)
+    {
+
+        email_edit = (EditText)findViewById(R.id.email);
+        password_edit = (EditText)findViewById(R.id.password);
+        String email = email_edit.getText().toString();
+        String password = password_edit.getText().toString();
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "이메일 로그인 성공",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "이메일 로그인 실패",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+
+    }
+
 }
