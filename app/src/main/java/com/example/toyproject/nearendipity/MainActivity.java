@@ -40,8 +40,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private CallbackManager mCallbackManager;
     private SignInButton google_btn;
     private LoginButton facebook_btn;
-
-    private EditText email_edit, password_edit;
+    private EditText email_edit, password_edit; //로그인용
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,6 +185,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 });
 
 
+
+    }
+
+
+    //회원가입 버튼
+    public void buttonRegister (View v)
+    {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
 
     }
 

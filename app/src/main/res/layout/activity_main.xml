@@ -73,5 +73,14 @@
         android:layout_marginTop="116dp"
         app:srcCompat="@drawable/logo" />
 
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/google_login_button"
+        android:layout_centerHorizontal="true"
+        android:onClick="buttonRegister"
+        android:text="회원가입" />
+
 
 </RelativeLayout>
