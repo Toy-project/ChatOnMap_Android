@@ -15,9 +15,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Ref;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,12 +34,10 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Button signup_btn;
     private EditText email_edit, password_edit, name_edit, passwordconfirm_edit; //회원가입용
-/****************************
-   private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-   private DatabaseReference databaseReference = firebaseDatabase.getReference();
-******************************/
-    private boolean register_db=false;
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference emailRef = database.getReference("email");
+    DatabaseReference nameRef = database.getReference("name");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
         signup_btn = findViewById(R.id.buttonSignUp);
+
         signup_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,12 +61,6 @@ public class RegisterActivity extends AppCompatActivity {
                 String Sname = name_edit.getText().toString();
 
                createAccount(Sname,Semail,Spassword,Spasswordconfirm);
-
-               if(register_db==true)
-               {
-                   //writeNewUser(Semail,Sname);
-                   register_db=false;
-               }
             }
         });
     }
@@ -89,17 +88,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 //데이터베이스에 저장
-/****************************
+
 private void writeNewUser(String email, String name) {
-
-
-    databaseReference.child("users").child(email).setValue(name);
+    emailRef.push().setValue(email);
+    nameRef.push().setValue(name);
 }
- ******************************/
-
-
-
-
     //회원가입
     private void createAccount(String name, String email, String password, String passwordconfirm) {
 
@@ -126,6 +119,8 @@ private void writeNewUser(String email, String name) {
             return;
         }
 
+
+
 //계정 생성 시작
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -139,10 +134,16 @@ private void writeNewUser(String email, String name) {
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "등록 성공", Toast.LENGTH_SHORT).show();
-                            register_db = true; // 성공시 true 저장 (db에 등록하기위함)
+                            email_edit = (EditText)findViewById(R.id.editTextEmail);
+                            String Semail = email_edit.getText().toString();
+                            name_edit = (EditText)findViewById(R.id.editTextName);
+                            String Sname = name_edit.getText().toString();
+                            writeNewUser(Semail, Sname); // 데이터베이스 저장
                             return;
                         } else {
+
                             Toast.makeText(RegisterActivity.this, "등록 에러", Toast.LENGTH_SHORT).show();
+
                             return;
                         }
 
@@ -152,7 +153,9 @@ private void writeNewUser(String email, String name) {
                 });
 
 
+
     }
+
 
 
 
